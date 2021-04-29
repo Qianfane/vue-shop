@@ -1,11 +1,11 @@
 <template>
   <div class="shop_container">
     <ul class="shop_list" v-if="shops.length">
-      <li class="shop_li border-1px" v-for="(shop, index) in shops"
-          :key="index" @click="$router.push('/shop')">
+      <li class="shop_li border-1px" v-for="(shop, index) in shops" :key="index"
+          @click="$router.push('/shop')">
         <a>
           <div class="shop_left">
-            <img class="shop_img" :src="baseImgUrl+shop.image_path">
+            <img class="shop_img" src="https://fuss10.elemecdn.com/2/35/696aa5cf9820adada9b11a3d14bf5jpeg.jpeg">
           </div>
           <div class="shop_right">
             <section class="shop_detail_header">
@@ -27,7 +27,7 @@
                 </div>
               </section>
               <section class="shop_rating_order_right">
-                <span class="delivery_style delivery_right">{{shop.delivery_mode.text}}</span>
+                <span class="delivery_style delivery_right">千帆专送</span>
               </section>
             </section>
             <section class="shop_distance">
@@ -40,10 +40,11 @@
           </div>
         </a>
       </li>
+
     </ul>
     <ul v-else>
       <li v-for="item in 6">
-        <img src="./images/shop_back.svg" alt="back">
+        <img src="./images/shop_back.svg">
       </li>
     </ul>
   </div>
@@ -51,20 +52,21 @@
 
 <script>
   import {mapState} from 'vuex'
-  import Star from '../Star/Star.vue'
+  import Star from "../Star/Star";
 
   export default {
     data () {
       return {
-        baseImgUrl: 'http://cangdu.org:8001/img/'
+        baseImgUrl: 'https://fuss10.elemecdn.com'
       }
     },
     computed: {
-      ...mapState(['shops'])
+      ...mapState(['shops', 'categorys'])
     },
     components: {
       Star
     }
+
   }
 </script>
 
@@ -133,6 +135,7 @@
               .shop_rating_order_left
                 float left
                 color #ff9a0d
+
                 .rating_section
                   float left
                   font-size 10px

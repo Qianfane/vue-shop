@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header_top">
     <slot name="left"></slot>
     <span class="header_title">
       <span class="header_title_text ellipsis">{{title}}</span>
@@ -18,7 +18,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .header
+  .header_top
     background-color #02a774
     position fixed
     z-index 100

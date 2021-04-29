@@ -2,5 +2,3 @@
 /config/
 /dist/
 /*.js
-*.vue
-*.js

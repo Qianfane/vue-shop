@@ -1,8 +1,8 @@
 <template>
   <section class="profile">
-    <HeaderTop title="我的"/>
+    <HeaderTop title="我的"></HeaderTop>
     <section class="profile-number">
-      <router-link :to="userInfo._id ? '/userinfo': '/login'" class="profile-link">
+      <router-link :to="userInfo._id?'/profile':'/login'" class="profile-link">
         <div class="profile_image">
           <i class="iconfont icon-person"></i>
         </div>
@@ -12,7 +12,8 @@
                 <span class="user-icon">
                   <i class="iconfont icon-shouji icon-mobile"></i>
                 </span>
-            <span class="icon-mobile-number">{{userInfo.phone || '暂无绑定手机号'}}</span>
+            <span class="icon-mobile-number">{{userInfo.phone?userInfo.phone:'暂无绑定手机号'}}</span>
+
           </p>
         </div>
         <span class="arrow">
@@ -20,6 +21,9 @@
         </span>
       </router-link>
     </section>
+
+
+
     <section class="profile_info_data border-1px">
       <ul class="info_data_list">
         <a href="javascript:" class="info_data_link">
@@ -61,13 +65,13 @@
               </span>
         </div>
       </a>
-      <!-- 硅谷外卖会员卡 -->
+      <!-- 千帆外卖会员卡 -->
       <a href="javascript:" class="my_order">
             <span>
               <i class="iconfont icon-vip"></i>
             </span>
         <div class="my_order_div">
-          <span>硅谷外卖会员卡</span>
+          <span>千帆外卖会员卡</span>
           <span class="my_order_icon">
                 <i class="iconfont icon-jiantou1"></i>
               </span>
@@ -88,37 +92,42 @@
         </div>
       </a>
     </section>
-
     <section class="profile_my_order border-1px">
-      <mt-button type="danger" style="width: 100%" v-if="userInfo._id" @click="logout">退出登陆</mt-button>
+      <mt-button type="danger" style="width: 100%;" v-if="userInfo._id" @click.native="logout">退出登陆</mt-button>
     </section>
   </section>
 </template>
 
 <script>
-  import {mapState} from 'vuex'
-  import { MessageBox, Toast } from 'mint-ui'
-  import HeaderTop from '../../components/HeaderTop/HeaderTop.vue'
+  import { mapState } from 'vuex'
+  import { MessageBox, Toast, Button } from 'mint-ui'
+
+  import Login from "../Login/Login";
+  import HeaderTop from "../../components/HeaderTop/HeaderTop";
+  import Vue from 'vue'
+  Vue.component(Button.name, Button);
+
   export default {
+
     computed: {
       ...mapState(['userInfo'])
     },
     methods: {
-      logout () {
-        MessageBox.confirm('确认退出吗?').then(
+      logout() {
+        MessageBox.confirm('确定执行此操作?').then(
           action => {
-            // 请求退出
+            // 分发登出事件
             this.$store.dispatch('logout')
             Toast('登出完成')
           },
           action => {
-            console.log('点击了取消')
+            console.log("点击了取消")
           }
         );
       }
     },
-
     components: {
+      Login,
       HeaderTop
     }
   }

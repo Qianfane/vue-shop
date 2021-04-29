@@ -78,7 +78,6 @@
   import Star from '../../../components/Star/Star.vue'
 
   export default {
-
     data () {
       return {
         onlyShowText: true, // 是否只显示有文本的
@@ -86,11 +85,15 @@
       }
     },
     mounted () {
+      console.log(new Date().getTime())
       this.$store.dispatch('getShopRatings', () => {
         this.$nextTick(() => {
           new BScroll(this.$refs.ratings, {
             click: true
           })
+          // new BScroll('ratings', {
+          //   click: true
+          // })
         })
       })
     },
